@@ -17,19 +17,20 @@ public class Mask {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	private String name, description;
-	private int quanity;
+	private int quantity;
 	private double price;
 	@ManyToOne
 	@JsonIgnore
-	@JoinColumn(name="categoryId")
+	@JoinColumn(name = "categoryId")
 	private Category category;
-	
-	public Mask(){}
-	
-	public Mask(String name, String description,int quanity, double price, Category category){
+
+	public Mask() {
+	}
+
+	public Mask(String name, String description, int quantity, double price, Category category) {
 		this.name = name;
 		this.description = description;
-		this.quanity = quanity;
+		this.quantity = quantity;
 		this.price = price;
 		this.category = category;
 	}
@@ -48,14 +49,14 @@ public class Mask {
 
 	public void setName(String name) {
 		this.name = name;
-	}	
-
-	public int getQuanity() {
-		return quanity;
 	}
 
-	public void setQuanity(int quanity) {
-		this.quanity = quanity;
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 
 	public String getDescription() {
@@ -81,7 +82,5 @@ public class Mask {
 	public void setCategory(Category category) {
 		this.category = category;
 	}
-	
-	
-	
+
 }

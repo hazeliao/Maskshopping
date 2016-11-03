@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import mask.shop.shan.domain.Mask;
 import mask.shop.shan.domain.CategoryRepository;
 import mask.shop.shan.domain.MaskRepository;
+import mask.shop.shan.domain.OrderList;
 
 @Controller
 public class MaskController {
@@ -71,6 +72,16 @@ public class MaskController {
     	mrepository.delete(maskId);
         return "redirect:../masklist";
     }   
-
+    
+    //add mask to cart
+    @RequestMapping(value = "/cart/{id}")
+    public String cart (@PathVariable("id") Long maskId, Model model){
+    	
+    	model.addAttribute("mask", mrepository.findOne(maskId));
+    	model.addAttribute("order", new OrderList());
+    	
+    	
+    	return "cart";
+    }
 	
 }

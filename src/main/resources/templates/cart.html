@@ -1,12 +1,12 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org" xlmns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-    <title>MaskList</title>
+    <title>Order List</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"  th:href="@{css/bootstrap.min.css}" />
 </head>
 <body>
-	<h1>Masks</h1>
+	<h1>Orders</h1>
 	
 	
 	<div class="col-md-4">
@@ -17,37 +17,26 @@
 			<input type="submit" value="Sign Out" class="btn btn-danger"/>
 		</form>
 	</div> 
-	
     <table class="table table-striped" >
 		<tr>
-		    <th>Name</th>
-		    <th>Left amount</th>
+		    <th>Product Name</th>		    
 		    <th>Description</th>
-		    <th>Price</th>
-		    <th>Category</th>
+		    <th>Price</th>		    
+		    <th>Amount</th>
+		    <th>Total</th>
 		    <th></th>
 		    <th></th>
 		</tr>  
     	<tr th:each = "mask : ${masks}">
-    		
-    		<td th:text="${mask.name}"></td>
-    		<td th:text="${mask.quantity}"></td>
+    		<td th:text="${mask.name}"></td>    		
     		<td th:text="${mask.description}"></td>
     		<td th:text="${mask.price}"></td>
-    		<td th:text="${mask.category.name}"></td>
-    		<td>
-    		<input type="checkbox" name="mycheckbox" checked="checked"/>
-    		<form th:action="@{/cart/{id}(id=${mask.id})}" method="post">
-    		
-    		<a href="@{/cart/{id}(id=${mask.id})}" class="btn btn-success">Add to cart</a>
-    
-    		</form>
-    		
-    		</td>
- 		 	<td sec:authorize = "hasAuthority('ADMIN')"><a th:href= "@{/delete/{id}(id=${mask.id})}" > Delete</a></td>
+    		<td><input type = "text" /></td>  
+    		<td></td>  		
+ 		 	<td><div><button> Delete</button></div></td>
  		 	 		
     	</tr>
      </table>
-	 <a sec:authorize = "hasAuthority('ADMIN')" href="/add" class="btn btn-success">Add mask</a>    	
+	 <a href="/masklist" class="btn btn-success">Continue shopping</a>    	
 </body>
 </html>
