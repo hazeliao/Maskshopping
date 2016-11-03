@@ -32,6 +32,10 @@ public class OrderList {
 	private double total;
 	
 	public OrderList(){}
+	
+	public OrderList (Mask mask){
+		this.mask = mask;
+	}
 
 	public Long getId() {
 		return id;
@@ -71,6 +75,12 @@ public class OrderList {
 
 	public void setTotal(double total) {
 		this.total = total;
+	}
+
+	@Override
+	public String toString() {
+		return "OrderList [id=" + id + ", mask=" + mask + ", amount=" + amount + ", price=" + price + ", total=" + total
+				+ "]";
 	}
 	
 	

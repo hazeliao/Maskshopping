@@ -2,6 +2,8 @@ package mask.shop.shan.web;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -9,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
@@ -16,6 +19,7 @@ import mask.shop.shan.domain.Mask;
 import mask.shop.shan.domain.CategoryRepository;
 import mask.shop.shan.domain.MaskRepository;
 import mask.shop.shan.domain.OrderList;
+import mask.shop.shan.domain.OrderRepository;
 
 @Controller
 public class MaskController {
@@ -25,6 +29,9 @@ public class MaskController {
 	
 	@Autowired
 	private CategoryRepository crepository;
+	
+	@Autowired
+	private OrderRepository orepository;
 	
 	@RequestMapping(value="/login")
     public String login() {	
@@ -75,11 +82,16 @@ public class MaskController {
     
     //add mask to cart
     @RequestMapping(value = "/cart/{id}")
-    public String cart (@PathVariable("id") Long maskId, Model model){
+    public String cart (@PathVariable("id") Long id,  Model model){
     	
-    	model.addAttribute("mask", mrepository.findOne(maskId));
-    	model.addAttribute("order", new OrderList());
-    	
+    	Mask mask = mrepository.findById(id);
+    	System.out.println(mask.getId());
+    	System.out.println(mask.getName());
+    	OrderList order = new OrderList();
+    	order.setMask(mask);
+    	order.setPrice(mask.getPrice());
+    	model.addAttribute("orders", order);
+    	System.out.println(order.toString());
     	
     	return "cart";
     }

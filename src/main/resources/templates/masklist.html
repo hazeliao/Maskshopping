@@ -17,6 +17,11 @@
 			<input type="submit" value="Sign Out" class="btn btn-danger"/>
 		</form>
 	</div> 
+		<div class="col-md-4" style="padding:20px 0">
+		<form th:action="@{/cart}" method="post">
+			<input type="submit" value="Cart" class="btn btn-success"/>
+		</form>
+	</div> 
 	
     <table class="table table-striped" >
 		<tr>
@@ -36,18 +41,17 @@
     		<td th:text="${mask.price}"></td>
     		<td th:text="${mask.category.name}"></td>
     		<td>
-    		<input type="checkbox" name="mycheckbox" checked="checked"/>
-    		<form th:action="@{/cart/{id}(id=${mask.id})}" method="post">
     		
-    		<a href="@{/cart/{id}(id=${mask.id})}" class="btn btn-success">Add to cart</a>
+    		<a th:href="@{/cart/{id}(id=${mask.id})}" class="btn btn-success">Add to cart</a>
     
-    		</form>
+    		
     		
     		</td>
- 		 	<td sec:authorize = "hasAuthority('ADMIN')"><a th:href= "@{/delete/{id}(id=${mask.id})}" > Delete</a></td>
+ 		 	<td sec:authorize = "hasAuthority('ADMIN')"><a th:href= "@{/delete/{id}(id=${mask.id})}" class="btn btn-danger"> Delete</a></td>
  		 	 		
     	</tr>
      </table>
+     
 	 <a sec:authorize = "hasAuthority('ADMIN')" href="/add" class="btn btn-success">Add mask</a>    	
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
     <title>Order List</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"  th:href="@{css/bootstrap.min.css}" />
+    <link type="text/css" rel="stylesheet" href="../css/bootstrap.min.css"  th:href="@{../css/bootstrap.min.css}" />
 </head>
 <body>
 	<h1>Orders</h1>
@@ -23,20 +23,26 @@
 		    <th>Description</th>
 		    <th>Price</th>		    
 		    <th>Amount</th>
-		    <th>Total</th>
+		    <th>Total Price</th>
 		    <th></th>
 		    <th></th>
 		</tr>  
-    	<tr th:each = "mask : ${masks}">
-    		<td th:text="${mask.name}"></td>    		
-    		<td th:text="${mask.description}"></td>
-    		<td th:text="${mask.price}"></td>
-    		<td><input type = "text" /></td>  
-    		<td></td>  		
+    	<tr th:each = "order : ${orders}">
+    		<td th:text="${order.mask.name}"></td>    		
+    		<td th:text="${order.mask.description}"></td>
+    		<td th:text="${order.mask.price}"></td>
+    		<td>
+    			<input type = "text" size = "3" name = "amount" value = "1"  th:value = "*{order.amount}"/>
+    		</td>  
+    		<td>
+    			<div th:with = "total = ${order.mask.price*order.amount}">
+    			<span th:text= "${total}"></span></div>
+    		</td>  		
  		 	<td><div><button> Delete</button></div></td>
  		 	 		
     	</tr>
      </table>
-	 <a href="/masklist" class="btn btn-success">Continue shopping</a>    	
+	 <a href="/masklist" class="btn btn-success">Continue shopping</a>    
+	 <a href="redirect:../cart" class="btn btn-success">Update cart</a> 	
 </body>
 </html>
