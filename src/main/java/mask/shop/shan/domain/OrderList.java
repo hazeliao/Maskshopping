@@ -25,7 +25,7 @@ public class OrderList {
     @JoinColumn(name = "mask", nullable = false )
 	private Mask mask;
 	@Column(name = "amount", nullable = false)
-	private int amount;
+	private int amount = 1;
 	@Column(name = "price", nullable = false)
 	private double price;
 	@Column(name = "total", nullable = false)

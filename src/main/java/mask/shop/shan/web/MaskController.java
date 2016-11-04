@@ -2,8 +2,6 @@ package mask.shop.shan.web;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -11,7 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
@@ -35,12 +33,14 @@ public class MaskController {
 	
 	@RequestMapping(value="/login")
     public String login() {	
+		orepository.deleteAll();
         return "login";
     }	
 	
 	//show all the products
 	@RequestMapping(value="/masklist")
 	public String Mask(Model model){
+		
 		model.addAttribute("masks", mrepository.findAll());
 		return "masklist";
 	}
@@ -75,7 +75,7 @@ public class MaskController {
     //delete mask
     @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-    public String deleteStudent(@PathVariable("id") Long maskId, Model model) {
+    public String deleteMask(@PathVariable("id") Long maskId, Model model) {
     	mrepository.delete(maskId);
         return "redirect:../masklist";
     }   
@@ -88,9 +88,12 @@ public class MaskController {
     	System.out.println(mask.getId());
     	System.out.println(mask.getName());
     	OrderList order = new OrderList();
+    	order.setId(id);
     	order.setMask(mask);
     	order.setPrice(mask.getPrice());
+    	
     	model.addAttribute("orders", order);
+    	orepository.save(order);
     	System.out.println(order.toString());
     	
     	return "cart";

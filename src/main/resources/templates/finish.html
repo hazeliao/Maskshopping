@@ -6,8 +6,6 @@
     <link type="text/css" rel="stylesheet" href="../css/bootstrap.min.css"  th:href="@{../css/bootstrap.min.css}" />
 </head>
 <body>
-	<h1>Orders</h1>
-	
 	
 	<div class="col-md-4">
 		<h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
@@ -18,41 +16,33 @@
 		</form>
 	</div> 
 	
+	<div style = "float:left">
+	<h1>You have made orders successfully</h1>
+	
+	</div>
+	
+	
+	
     <table class="table table-striped" >
 		<tr>
 		    <th>Product Name</th>		    
-		    <th>Description</th>
-		    <th>Price</th>		    
+		    <th>Description</th> 
 		    <th>Amount</th>
 		    <th>Total Price</th>
 		    <th></th>
-		    <th></th>
+		    
 		</tr>  
-		
     	<tr th:each = "order : ${orders}">
-    		<form th:action="@{/update/{id}(id=${order.id})}" method="get">
     		<td th:text="${order.mask.name}"></td>    		
     		<td th:text="${order.mask.description}"></td>
-    		<td th:text="${order.mask.price}"></td>
-    		<td>
-    			
-    			<input type = "text" size = "3" name = "amount" th:value = "*{order.amount}"/>
-    			
-    		</td>  
+    		<td th:value = "*{order.amount}"></td>  
     		<td>
     			<div th:with = "total = ${order.mask.price*order.amount}">
     			<span th:text= "${total}"></span></div>
     		</td>  		
- 		 	<td><div><a th:href="@{/delete1/{id}(id=${order.id})}"> Delete</a></div></td>
- 		 	<td><div><a th:href="@{/update/{id}(id=${order.id})}"> <input type="submit" value="Save"></input></a></div></td>	 	
- 		 	 </form>	
+ 		 	
     	</tr>
-    	
      </table>
-     
-	 <a href="/masklist" class="btn btn-success">Continue shopping</a>    
-	 <a style="margin:100px " href="/cart" class="btn btn-success">Update cart</a> 
-	 <a style="margin:100px " href="/finish" class="btn btn-success">Check out</a> 
 	 
 </body>
 </html>
