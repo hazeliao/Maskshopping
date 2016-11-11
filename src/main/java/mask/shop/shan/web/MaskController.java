@@ -90,8 +90,7 @@ public class MaskController {
     	OrderList order = new OrderList();
     	order.setId(id);
     	order.setMask(mask);
-    	order.setPrice(mask.getPrice());
-    	
+    	order.setPrice(mask.getPrice());    	
     	model.addAttribute("orders", order);
     	orepository.save(order);
     	System.out.println(order.toString());

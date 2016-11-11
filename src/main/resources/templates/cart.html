@@ -30,7 +30,7 @@
 		</tr>  
 		
     	<tr th:each = "order : ${orders}">
-    		<form th:action="@{/update/{id}(id=${order.id})}" method="get">
+    		<form th:action="@{/update/{id}(id=${order.id})}" method="get">    		 
     		<td th:text="${order.mask.name}"></td>    		
     		<td th:text="${order.mask.description}"></td>
     		<td th:text="${order.mask.price}"></td>
@@ -43,15 +43,16 @@
     			<div th:with = "total = ${order.mask.price*order.amount}">
     			<span th:text= "${total}"></span></div>
     		</td>  		
- 		 	<td><div><a th:href="@{/delete1/{id}(id=${order.id})}"> Delete</a></div></td>
- 		 	<td><div><a th:href="@{/update/{id}(id=${order.id})}"> <input type="submit" value="Save"></input></a></div></td>	 	
+ 		 	<td><div><a th:href="@{/delete1/{id}(id=${order.id})}" class="btn btn-danger"> Delete</a></div></td>
+ 		 	<td><div><a th:href="@{/update/{id}(id=${order.id})}"><input type="submit" value="Update" class="btn btn-success"></input></a></div></td>	 	
  		 	 </form>	
     	</tr>
     	
      </table>
      
 	 <a href="/masklist" class="btn btn-success">Continue shopping</a>    
-	 <a style="margin:100px " href="/cart" class="btn btn-success">Update cart</a> 
+	 
+	 <!-- <a style="margin:100px " href="@{/update/{id}(id=${order.id})}" class="btn btn-success">Update cart</a>  -->
 	 <a style="margin:100px " href="/finish" class="btn btn-success">Check out</a> 
 	 
 </body>

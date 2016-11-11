@@ -28,14 +28,14 @@
 		    <th>Product Name</th>		    
 		    <th>Description</th> 
 		    <th>Amount</th>
-		    <th>Total Price</th>
+		    <th>Price</th>
 		    <th></th>
 		    
 		</tr>  
     	<tr th:each = "order : ${orders}">
     		<td th:text="${order.mask.name}"></td>    		
     		<td th:text="${order.mask.description}"></td>
-    		<td th:value = "*{order.amount}"></td>  
+    		<td th:text = "${order.amount}"></td>  
     		<td>
     			<div th:with = "total = ${order.mask.price*order.amount}">
     			<span th:text= "${total}"></span></div>
@@ -43,6 +43,8 @@
  		 	
     	</tr>
      </table>
+     
+     
 	 
 </body>
 </html>

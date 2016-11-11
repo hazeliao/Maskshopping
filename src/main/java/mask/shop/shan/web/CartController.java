@@ -41,20 +41,16 @@ public class CartController {
  		System.out.println("TESTING");
  		System.out.println(amount);
  		int quantity = Integer.parseInt(amount);
- 		System.out.println("ID: " + id);
- 		List<OrderList> orders = (List<OrderList>) orepository.findAll();
- 		System.out.println(orders);
- 		
- 		System.out.println(orders.get(1));
- 		System.out.println(orepository.findOne(id).getAmount());
- 		
- 		
+ 		System.out.println("ID: " + id); 		
+ 		System.out.println(orepository.findOne(id).getAmount());	
  		orepository.findOne(id).setAmount(quantity);
- 		System.out.println(quantity);
- 	
- 		System.out.println(orepository.findOne(id).toString());
+ 		orepository.save(orepository.findOne(id));
+ 		System.out.println(quantity); 	
+ 		System.out.println(orepository.findOne(id).toString()); 		
     	return "redirect:../cart";
     }
+ 	
+ 	
  	
 	@RequestMapping(value="/order/{id}", method = RequestMethod.GET)
     public @ResponseBody OrderList findBookRest(@PathVariable("id") Long id){
