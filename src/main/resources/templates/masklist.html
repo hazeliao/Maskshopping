@@ -26,7 +26,6 @@
     <table class="table table-striped" >
 		<tr>
 		    <th>Name</th>
-		    <th>Left amount</th>
 		    <th>Description</th>
 		    <th>Price</th>
 		    <th>Category</th>
@@ -36,7 +35,6 @@
     	<tr th:each = "mask : ${masks}">
     		
     		<td th:text="${mask.name}"></td>
-    		<td th:text="${mask.quantity}"></td>
     		<td th:text="${mask.description}"></td>
     		<td th:text="${mask.price}"></td>
     		<td th:text="${mask.category.name}"></td>

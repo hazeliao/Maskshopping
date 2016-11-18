@@ -37,12 +37,14 @@ public class MaskshoppingApplication {
 	public CommandLineRunner demo(){
 		return(args) -> {
 			log.info("save a couple of masks");
-			crepository.save(new Category("1"));
-			crepository.save(new Category("2"));
-			crepository.save(new Category("3"));
+			crepository.save(new Category("Exclusive"));
+			crepository.save(new Category("Moisturizing"));
+			crepository.save(new Category("Revitalizing"));
 			
-			mrepository.save(new Mask("AAA", "abdsjijfeowfafwe", 10000, 10.2, crepository.findByName("1").get(0)));
-			mrepository.save(new Mask("BBB", "Animal Farm", 10000, 255.1, crepository.findByName("2").get(0)));	
+			mrepository.save(new Mask("Lancome", "Absolute L'extrait ultimate Rose Serum Mask",  300.00, crepository.findByName("Exclusive").get(0)));
+			mrepository.save(new Mask("Guerlan", "Orchidee Imperiale Mask", 242.00, crepository.findByName("Revitalizing").get(0)));
+			mrepository.save(new Mask("La Mer", "Hydrating Facial", 195.00, crepository.findByName("Moisturizing").get(0)));
+			mrepository.save(new Mask("Sisley", "Express Flower Gel", 80.00, crepository.findByName("Moisturizing").get(0)));
 			
 			// Create users: admin/admin user/user
 					User user1 = new User("user", "$2a$06$3jYRJrg0ghaaypjZ/.g4SethoeA51ph3UD4kZi9oPkeMTpjKU5uo6", "USER");

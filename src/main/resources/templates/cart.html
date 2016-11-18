@@ -41,7 +41,7 @@
     		</td>  
     		<td>
     			<div th:with = "total = ${order.mask.price*order.amount}">
-    			<span th:text= "${total}"></span></div>
+    			<span th:text= "${#numbers.formatDecimal(total, 0, 'DEFAULT',2,'DEFAULT')}"></span></div>
     		</td>  		
  		 	<td><div><a th:href="@{/delete1/{id}(id=${order.id})}" class="btn btn-danger"> Delete</a></div></td>
  		 	<td><div><a th:href="@{/update/{id}(id=${order.id})}"><input type="submit" value="Update" class="btn btn-success"></input></a></div></td>	 	

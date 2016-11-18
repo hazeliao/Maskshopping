@@ -21,6 +21,7 @@ public class Category {
 	
 	@OneToMany (cascade = CascadeType.ALL, mappedBy = "category")
 	private List<Mask> masks;
+	
 	public Category(){}
 	public Category(String name){
 		this.name=name;

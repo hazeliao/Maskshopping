@@ -2,8 +2,6 @@ package mask.shop.shan.web;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,37 +24,42 @@ public class CartController {
 	@Autowired
 	private OrderRepository orepository;
 	
+	//show all the products in the order	
 	@RequestMapping(value="/cart")
 	public String Order(Model model){
 		model.addAttribute("orders", orepository.findAll());
 		return "cart";
 	}
 	
+	//RESTful service to get order product by id
+	@RequestMapping(value="/orders/{id}", method = RequestMethod.GET)
+    public @ResponseBody OrderList finOrderRest(@PathVariable("id") Long Id){
+    	return orepository.findOne(Id);
+    }	
+	
+	//RESTful service to get all orders
  	@RequestMapping(value ="/orders")
     public @ResponseBody List<OrderList> orderListRest(){
     	return (List<OrderList>) orepository.findAll();
     }
+ 	
+ 	//Update the orders by change amount of the product
  	@RequestMapping(value ="/update/{id}", method = RequestMethod.GET)
     public String UpdateOrder(@PathVariable("id") Long id,@RequestParam(name = "amount") String amount, Model model){
- 		System.out.println("TESTING");
+ 		//System.out.println("TESTING");
  		System.out.println(amount);
  		int quantity = Integer.parseInt(amount);
- 		System.out.println("ID: " + id); 		
- 		System.out.println(orepository.findOne(id).getAmount());	
+ 		System.out.println("ID: " + id); 	
+ 		System.out.println("Mask:" + orepository.findOne(id).toString()); 
+ 		System.out.println("Amount:" + orepository.findOne(id).getAmount());	
  		orepository.findOne(id).setAmount(quantity);
- 		orepository.save(orepository.findOne(id));
- 		System.out.println(quantity); 	
- 		System.out.println(orepository.findOne(id).toString()); 		
+ 		orepository.save(orepository.findOne(id));	
+ 		/* System.out.println(quantity); 	
+ 		System.out.println(orepository.findOne(id).toString()); */		
     	return "redirect:../cart";
     }
- 	
- 	
- 	
-	@RequestMapping(value="/order/{id}", method = RequestMethod.GET)
-    public @ResponseBody OrderList findBookRest(@PathVariable("id") Long id){
-    	return orepository.findOne(id);
-    }
-	
+ 	 	
+	//delete one of the orders
 	@RequestMapping(value = "/delete1/{id}", method = RequestMethod.GET)
     public String deleteOrder(@PathVariable("id") Long id, Model model) {
 		//System.out.println(id);		
@@ -64,6 +67,7 @@ public class CartController {
         return "redirect:../cart";
     }   
 	
+	//finish the shopping
 	@RequestMapping(value="/finish")
 	public String FinishOrder(Model model){
 		model.addAttribute("orders", orepository.findAll());

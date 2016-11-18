@@ -1,0 +1,36 @@
+package mask.shop.shan;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+import mask.shop.shan.web.CartController;
+import mask.shop.shan.web.MaskController;
+import mask.shop.shan.web.UserController;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class SmokeTest {
+	@Autowired
+	private MaskController mcontroller;
+	
+	@Autowired
+	private UserController ucontroller;
+	
+	@Autowired
+	private CartController ccontroller;
+	
+	@Test
+	public void contexLoads() throws Exception{
+		assertThat(mcontroller).isNotNull();
+		assertThat(ucontroller).isNotNull();
+		assertThat(ccontroller).isNotNull();
+		
+	}
+	
+
+}

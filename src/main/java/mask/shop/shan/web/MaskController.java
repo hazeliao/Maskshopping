@@ -53,7 +53,7 @@ public class MaskController {
     
     //RESTful service to get mask by id
     @RequestMapping(value="/mask/{id}", method = RequestMethod.GET)
-    public @ResponseBody Mask findBookRest(@PathVariable("id") Long maskId){
+    public @ResponseBody Mask findMaskRest(@PathVariable("id") Long maskId){
     	return mrepository.findOne(maskId);
     }
 	
@@ -84,11 +84,11 @@ public class MaskController {
     @RequestMapping(value = "/cart/{id}")
     public String cart (@PathVariable("id") Long id,  Model model){
     	
-    	Mask mask = mrepository.findById(id);
+    	Mask mask = mrepository.findOne(id);
     	System.out.println(mask.getId());
     	System.out.println(mask.getName());
     	OrderList order = new OrderList();
-    	order.setId(id);
+    	
     	order.setMask(mask);
     	order.setPrice(mask.getPrice());    	
     	model.addAttribute("orders", order);
