@@ -39,17 +39,14 @@
     		<td th:text="${mask.price}"></td>
     		<td th:text="${mask.category.name}"></td>
     		<td>
-    		
-    		<a th:href="@{/cart/{id}(id=${mask.id})}" class="btn btn-success">Add to cart</a>
-    
-    		
-    		
-    		</td>
+    		  		<a th:href="@{/cart/{id}(id=${mask.id})}" class="btn btn-success">Add to cart</a>
+        	</td>
  		 	<td sec:authorize = "hasAuthority('ADMIN')"><a th:href= "@{/delete/{id}(id=${mask.id})}" class="btn btn-danger"> Delete</a></td>
  		 	 		
     	</tr>
      </table>
-     
-	 <a sec:authorize = "hasAuthority('ADMIN')" href="/add" class="btn btn-success">Add mask</a>    	
+          
+	 <a sec:authorize = "hasAuthority('ADMIN')" href="/add" class="btn btn-success">Add mask</a>    
+	 	
 </body>
 </html>

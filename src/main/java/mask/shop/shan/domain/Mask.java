@@ -54,9 +54,7 @@ public class Mask {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-	
-	
+	}	
 
 	public List<OrderList> getOrders() {
 		return orders;

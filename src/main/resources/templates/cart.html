@@ -27,31 +27,32 @@
 		    <th>Total Price</th>
 		    <th></th>
 		    <th></th>
-		</tr>  
-		
+		</tr>  		
     	<tr th:each = "order : ${orders}">
     		<form th:action="@{/update/{id}(id=${order.id})}" method="get">    		 
     		<td th:text="${order.mask.name}"></td>    		
     		<td th:text="${order.mask.description}"></td>
-    		<td th:text="${order.mask.price}"></td>
-    		<td>
-    			
-    			<input type = "text" size = "3" name = "amount" th:value = "*{order.amount}"/>
-    			
+    		<td th:text="${order.mask.price} "></td>
+    		<td>    			
+    			<input type = "text" size = "3" name = "amount" th:value = "*{order.amount}"/>    			
     		</td>  
     		<td>
     			<div th:with = "total = ${order.mask.price*order.amount}">
-    			<span th:text= "${#numbers.formatDecimal(total, 0, 'DEFAULT',2,'DEFAULT')}"></span></div>
+    				<input style = "border:none; background:transparent" type = "text" name = "total" readonly = "readonly" th:value= "${#numbers.formatDecimal(total, 0, 'DEFAULT',2,'DEFAULT')} " ></input>
+    			</div>
     		</td>  		
  		 	<td><div><a th:href="@{/delete1/{id}(id=${order.id})}" class="btn btn-danger"> Delete</a></div></td>
- 		 	<td><div><a th:href="@{/update/{id}(id=${order.id})}"><input type="submit" value="Update" class="btn btn-success"></input></a></div></td>	 	
+ 		 	<td>
+ 		 		<div>
+ 		 			<a th:href="@{/update/{id}(id=${order.id})}">
+ 		 				<input type="submit" value="Update" class="btn btn-success"></input>
+ 		 			</a>
+ 		 		</div>
+ 		 	</td>	 	
  		 	 </form>	
-    	</tr>
-    	
-     </table>
-     
-	 <a href="/masklist" class="btn btn-success">Continue shopping</a>    
-	 
+    	</tr>    	
+     </table>     
+	 <a href="/masklist" class="btn btn-success">Continue shopping</a>    	 
 	 <!-- <a style="margin:100px " href="@{/update/{id}(id=${order.id})}" class="btn btn-success">Update cart</a>  -->
 	 <a style="margin:100px " href="/finish" class="btn btn-success">Check out</a> 
 	 

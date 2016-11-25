@@ -45,7 +45,7 @@ public class CartController {
  	
  	//Update the orders by change amount of the product
  	@RequestMapping(value ="/update/{id}", method = RequestMethod.GET)
-    public String UpdateOrder(@PathVariable("id") Long id,@RequestParam(name = "amount") String amount, Model model){
+    public String UpdateOrder(@PathVariable("id") Long id,@RequestParam(name = "amount") String amount,@RequestParam(name = "total") double total, Model model){
  		//System.out.println("TESTING");
  		System.out.println(amount);
  		int quantity = Integer.parseInt(amount);
@@ -53,9 +53,12 @@ public class CartController {
  		System.out.println("Mask:" + orepository.findOne(id).toString()); 
  		System.out.println("Amount:" + orepository.findOne(id).getAmount());	
  		orepository.findOne(id).setAmount(quantity);
+ 		double price = orepository.findOne(id).getPrice();
+ 		total = price * quantity;
+ 		orepository.findOne(id).setTotal(total);
  		orepository.save(orepository.findOne(id));	
- 		/* System.out.println(quantity); 	
- 		System.out.println(orepository.findOne(id).toString()); */		
+ 		/* System.out.println(quantity); */	
+ 		System.out.println(orepository.findOne(id).toString()); 		
     	return "redirect:../cart";
     }
  	 	
@@ -70,9 +73,16 @@ public class CartController {
 	//finish the shopping
 	@RequestMapping(value="/finish")
 	public String FinishOrder(Model model){
+		List<OrderList> orders= (List<OrderList>) orepository.findAll();
 		model.addAttribute("orders", orepository.findAll());
+		double sum = 0;
+		for (int i = 0; i < orders.size(); i++){
+			sum += orders.get(i).getTotal();
+		}
+		model.addAttribute("sum", sum);
 		return "finish";
 	}
+	
 	
 
 }

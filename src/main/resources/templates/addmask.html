@@ -5,29 +5,31 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link type="text/css" rel="stylesheet" th:href="@{css/bootstrap.min.css}" />
 </head>
-<body>
+<body style= "margin:100px">
+	
 	<h1>Add book</h1>
 	<div>
 		<form th:object="${mask}" th:action="@{save}" action="#" method="post">		  	
 			<label for="name">Name</label>
+			<div style="clear: both; display: block; height: 10px;"></div>
 			<input type="text" id="name" th:field="*{name}" />
-			<label for="quantity">Quantity</label>
-			<input type="text" id="quantity" th:field="*{quantity}" />
 			<div style="clear: both; display: block; height: 10px;"></div>
 		  	<label for="description">Description</label>
+		  	<div style="clear: both; display: block; height: 10px;"></div>
 			<input type="text" id="description" th:field="*{description}" />
 			<div style="clear: both; display: block; height: 10px;"></div>
 		  	<label for="price">Price</label>
+		  	<div style="clear: both; display: block; height: 10px;"></div>
 			<input type="text" th:field="*{price}" />				
 			<div style="clear: both; display: block; height: 10px;"></div>
 			<label for="name">Category</label>
-			<select id="name" th:field="*{category}" class ="form-control">
+			<select style = "width:auto;" id="name" th:field="*{category}" class ="form-control">
 				<option th:each="category:${categorys}"
 						th:value="${category.categoryId}"
 						th:text="${category.name}"></option>
 			</select>
 			<div style="clear: both; display: block; height: 10px;"></div>
-			<input type="submit" value="Save"></input>
+			<input  class="btn btn-success" type="submit" value="Save"></input>
 		</form>
 	</div>
 </body>
