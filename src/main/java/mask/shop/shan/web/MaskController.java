@@ -58,6 +58,7 @@ public class MaskController {
     }
 	
   //add new mask
+    @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "/add")
     public String addStudent(Model model){
     	model.addAttribute("mask", new Mask());
